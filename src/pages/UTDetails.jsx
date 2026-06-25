@@ -57,12 +57,9 @@ text-xs
 md:text-base
 "
 >
-<span className="text-yellow-400 animate-pulse">
-✦
-</span>
-
-<span>
-Discover the beauty of {ut.name}
+<span className="text-[11px] md:text-base text-center leading-snug">
+  <span className="text-yellow-400 animate-pulse">✦</span>
+  {" "}Discover the beauty of {ut.name}
 </span>
 </div>
 
