@@ -93,31 +93,14 @@ export default function UnionTerritories() {
 
           <div className="w-32 h-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mt-2 mb-4"></div>
 
-<div className="
-inline-flex
-items-center
-gap-2
-max-w-auto
-px-4
-py-2
-md:max-w-none
-md:px-5
-md:py-3
-rounded-full
-bg-white/15
-backdrop-blur-xl
-border
-border-white/20
-">
-  <span className="text-yellow-400 text-sm animate-pulse shrink-0">
-    ✦
-  </span>
+<div className="inline-flex items-center px-4 py-3 rounded-full bg-white/15 backdrop-blur-xl border border-white/20">
 
-  <span className="text-[11px] md:text-base text-center leading-snug">
-    Discover hidden gems, rich heritage and breathtaking landscapes
-  </span>
+  
+<span className="text-[11px] md:text-base text-center leading-snug">
+  <span className="text-yellow-400 animate-pulse">✦</span>
+  {" "}Discover India's Untold Beauty
+</span>
 </div>
-
 </div>
  
 </section>

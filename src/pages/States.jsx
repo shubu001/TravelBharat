@@ -64,44 +64,12 @@ const filteredStates = states.filter((state) =>
           <div className="w-32 h-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mt-2 mb-4"></div>
 
 <div className="flex justify-center mt-6">
-  <div
-    className="
-inline-flex items-center gap-2 md:gap-3
-px-3 py-2
-md:px-8 md:py-3
-rounded-full
-bg-white/10
-backdrop-blur-3xl
-border border-white/30
-max-w-[300px]
-md:max-w-none
-overflow-hidden"
-  >
-    <span
-      className="
-        text-yellow-400
-        text-xs md:text-base
-        animate-pulse
-        drop-shadow-[0_0_8px_#facc15]
-      "
-    >
-      ✦
-    </span>
-
-    <span
-      className="
-        text-white
-        font-medium
-
-        text-[10px]
-        md:text-base
-
-        whitespace-nowrap
-      "
-    >
-      Discover Culture, Heritage, Nature & Adventure
-    </span>
-  </div>
+  <div className="inline-flex items-center px-4 py-3 rounded-full bg-white/15 backdrop-blur-xl border border-white/20">
+  <span className="text-[11px] md:text-base text-center leading-snug">
+  <span className="text-yellow-400 animate-pulse">✦</span>
+  {" "}Discover Culture, Heritage, Nature & Adventure
+</span>
+</div>
 </div>
 
           <div className="mt-8">
