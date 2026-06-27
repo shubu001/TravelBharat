@@ -6,6 +6,7 @@ import { FiNavigation,FiX,} from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { X, MapPin, CalendarDays, Clock3, Ticket } from "lucide-react";
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 export default function PlaceDetails() {
   const navigate = useNavigate();
@@ -66,13 +67,14 @@ export default function PlaceDetails() {
 
 
               <a
-                href={place.googleMapsLink}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full font-semibold transition"
-              >
-                🗺 Open Maps
-              </a>
+  href={place.googleMapsLink}
+  target="_blank"
+  rel="noreferrer"
+  className="inline-flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-semibold transition"
+>
+  <FaMapMarkedAlt />
+  <span>Open Maps</span>
+</a>
 
             </div>
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
 import { FiSearch } from "react-icons/fi";
 import travelBanner from "../assets/tbbanner.PNG";
 
@@ -37,7 +38,9 @@ export default function States() {
   { name: "Uttarakhand", desc: "Land of Gods", image: "https://images.unsplash.com/photo-1607406374368-809f8ec7f118?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { name: "West Bengal", desc: "Culture & Literature", image: "https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
+
 const [search, setSearch] = useState("");
+const [showDropdown, setShowDropdown] = useState(false);
 
 const filteredStates = states.filter((state) =>
   state.name.toLowerCase().includes(search.toLowerCase())
@@ -54,7 +57,7 @@ const filteredStates = states.filter((state) =>
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
 
         <div className="relative z-10 text-center px-6">
           <h1 className="text-3xl md:text-6xl font-bold leading-tight">
@@ -77,27 +80,77 @@ const filteredStates = states.filter((state) =>
   <div className="p-[1px] rounded-full bg-gradient-to-r from-orange-500 via-slate-200 to-orange-500">
 
     <div className="relative w-[320px] md:w-[700px]">
-      
+
+      <input
+  type="text"
+  placeholder="Search States..."
+  value={search}
+  onFocus={() => setShowDropdown(true)}
+  onChange={(e) => {
+    setSearch(e.target.value);
+    setShowDropdown(true);
+  }}
+  onBlur={() => {
+    setTimeout(() => setShowDropdown(false), 150);
+  }}
+  className="
+    w-full
+    px-8 py-3
+    rounded-full
+    bg-[#080808]
+    text-white
+    placeholder-white/60
+    outline-none
+  "
+/>
+{showDropdown && (
+  <div
+    className="
+      absolute
+      left-0
+      right-0
+      mt-2
+      max-h-72
+      overflow-y-auto
+      rounded-2xl
+      bg-slate-900/95
+      backdrop-blur-xl
+      border
+      border-orange-500/20
+      shadow-2xl
+      z-50
+    "
+  >
+    {states
+      .filter((state) =>
+        state.name.toLowerCase().includes(search.toLowerCase())
+      )
+      .map((state) => (
+        <div
+          key={state.name}
+          onMouseDown={() => {
+            setSearch(state.name);
+            setShowDropdown(false);
+          }}
+          className="
+            px-5
+            py-3
+            cursor-pointer
+            hover:bg-orange-500
+            transition
+            border-b
+            border-white/5
+            last:border-none
+          "
+        >
+          {state.name}
+        </div>
+      ))}
+  </div>
+)}
       <FiSearch
         className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-2xl"
       />
-
-      <input
-        type="text"
-        placeholder="Search States..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="
-          w-full
-          px-8 py-3
-          rounded-full
-          bg-[#080808]
-          text-white
-          placeholder-white/60
-          outline-none
-        "
-      />
-
     </div>
 
   </div>

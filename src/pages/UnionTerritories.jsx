@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import utBanner from "../assets/union-bg.PNG";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 const unionTerritories = [
   {
@@ -72,34 +74,93 @@ tagline: "French Heritage & Beaches",
 ];
 
 export default function UnionTerritories() {
+  const [search, setSearch] = useState("");
+const [showDropdown, setShowDropdown] = useState(false);
+
+const filteredUT = unionTerritories.filter((ut) =>
+  ut.name.toLowerCase().includes(search.toLowerCase())
+);
+
+
+
   return (
     <div className="min-h-screen bg-slate-95 text-white">
       
       {/* Hero */}
       <section
-  className="relative h-[40vh] md:h-[45h] flex items-center justify-center"
+  className="relative h-[350px] md:h-[450px] flex items-center justify-center"
   style={{
     backgroundImage: `url(${utBanner})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   }}
 >
-    <div className="absolute inset-0 bg-black/70"></div>
+    <div className="absolute inset-0 bg-black/80"></div>
 
         <div className="relative z-10 text-center px-6 flex flex-col items-center gap-4">
           <h1 className="text-3xl md:text-6xl font-bold leading-[1.15]">
             Explore India's Union Territories
           </h1>
+<div className="w-32 h-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mt-2 mb-4"></div>
 
-          <div className="w-32 h-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mt-2 mb-4"></div>
-
-<div className="inline-flex items-center px-4 py-3 rounded-full bg-white/15 backdrop-blur-xl border border-white/20">
-
-  
-<span className="text-[11px] md:text-base text-center leading-snug">
+<div className="flex justify-center -mt-1">
+  <div className="inline-flex items-center px-4 py-3 rounded-full bg-white/15 backdrop-blur-xl border border-white/20">
+  <span className="text-[11px] md:text-base text-center leading-snug">
   <span className="text-yellow-400 animate-pulse">✦</span>
   {" "}Discover India's Untold Beauty
 </span>
+</div>
+</div>
+         
+
+<div className="mt-8">
+          <div className="mt -14 flex justify-center">
+  <div className="p-[1px] rounded-full bg-gradient-to-r from-orange-500 via-slate-200 to-orange-500">
+
+    <div className="relative w-[320px] md:w-[700px]">
+
+      <input
+        type="text"
+        placeholder="Search Union Territories..."
+        value={search}
+        onFocus={() => setShowDropdown(true)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setShowDropdown(true);
+        }}
+        onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
+        className="w-full px-8 py-3 rounded-full bg-[#080808] text-white placeholder-white/60 outline-none"
+      />
+
+      <FiSearch className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-2xl pointer-events-none" />
+
+      {showDropdown && (
+        <div className="absolute left-0 right-0 mt-2 max-h-72 overflow-y-auto rounded-2xl bg-slate-900 border border-orange-500/20 shadow-2xl z-50">
+
+          {unionTerritories
+            .filter((ut) =>
+              ut.name.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((ut) => (
+              <div
+                key={ut.id}
+                onMouseDown={() => {
+  navigate(`/union-territories/${ut.slug}`);
+
+                }}
+                className="px-5 py-3 cursor-pointer hover:bg-orange-500 transition border-b border-white/5 last:border-none"
+              >
+                {ut.name}
+              </div>
+            ))}
+
+        </div>
+      )}
+
+    </div>
+  </div>
+</div>
+
 </div>
 </div>
  
@@ -126,7 +187,7 @@ export default function UnionTerritories() {
       {/* Cards */}
       <div className="max-w-7xl mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {unionTerritories.map((ut) => (
+          {filteredUT.map((ut) => (
            <motion.div
   key={ut.id}
   whileHover={{
