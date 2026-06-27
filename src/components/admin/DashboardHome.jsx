@@ -7,8 +7,26 @@ import {
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
+import { LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export default function DashboardHome() {
+const navigate = useNavigate();
+
+const handleLogout = async () => {
+  try {
+    await signOut(auth); // Firebase logout
+
+    localStorage.clear();
+    sessionStorage.clear();
+
+    navigate("/login", { replace: true });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const [stateCount, setStateCount] = useState(0);
 const [destinationCount, setDestinationCount] = useState(0);
@@ -45,15 +63,27 @@ useEffect(() => {
 
       {/* Header */}
 
-      <div className="mb-8">
-        <h1 className="text-5xl font-bold text-white">
-          {destinationCount}
-        </h1>
+     <div className="mb-8 flex items-center justify-between">
 
-        <p className="text-slate-400 mt-2">
-          Manage TravelBharat tourism ecosystem.
-        </p>
-      </div>
+  <div>
+    <h1 className="text-5xl font-bold text-white">
+      {destinationCount}
+    </h1>
+
+    <p className="text-slate-400 mt-2">
+      Manage TravelBharat tourism ecosystem.
+    </p>
+  </div>
+
+  <button
+    onClick={handleLogout}
+    className="flex items-center gap-2 bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl font-semibold transition"
+  >
+    <LogOut size={18} />
+    Logout
+  </button>
+
+</div>
 
       {/* Welcome Card */}
 
