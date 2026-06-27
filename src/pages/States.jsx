@@ -146,13 +146,17 @@ const filteredStates = states.filter((state) =>
           {state.name}
         </div>
       ))}
+      {filteredStates.length === 0 && (
+  <p className="text-center text-slate-400 py-8">
+    No State Found
+  </p>
+)}
   </div>
 )}
       <FiSearch
         className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-2xl"
       />
     </div>
-
   </div>
 </div>
           </div>

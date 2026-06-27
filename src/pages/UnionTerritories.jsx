@@ -3,6 +3,7 @@ import utBanner from "../assets/union-bg.PNG";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import UTDetails from "./UTDetails";
 
 const unionTerritories = [
   {
@@ -142,17 +143,33 @@ const filteredUT = unionTerritories.filter((ut) =>
               ut.name.toLowerCase().includes(search.toLowerCase())
             )
             .map((ut) => (
-              <div
-                key={ut.id}
-                onMouseDown={() => {
-  navigate(`/union-territories/${ut.slug}`);
-
-                }}
-                className="px-5 py-3 cursor-pointer hover:bg-orange-500 transition border-b border-white/5 last:border-none"
-              >
-                {ut.name}
-              </div>
-            ))}
+              
+  <div
+    key={ut.id}
+    onMouseDown={() => {
+      setSearch(ut.name);
+      setShowDropdown(false);
+    }}
+    className="
+      px-5
+      py-3
+      cursor-pointer
+      hover:bg-orange-500
+      transition
+      border-b
+      border-white/5
+      last:border-none
+    "
+  >
+    {ut.name}
+  </div>
+))}
+{filteredUT.length === 0 && (
+  <p className="text-center text-slate-400 py-8">
+    No Union Territory Found
+  </p>
+)}
+            
 
         </div>
       )}
